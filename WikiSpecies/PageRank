@@ -1,0 +1,54 @@
+Step 1: Graph Builder: (pre-process txt)
+	
+	1a. input: 
+		foo.html: a, b ...
+		bar.html: a, c
+		....html...
+		(inlinks: outlinks)
+	1b. output:
+		foo 0.5/1(PR): a, b...
+		bar 0.5/1: a, c...
+		(inlinks PR: outlinks)
+
+Step 2: Iterate (from (inlinks PR: outlinks) to (inlinks PR: outlinks), same from start to end)
+	
+	2a. Map:
+		2a.i input: 
+			foo 0.5/1(PR): a, b...
+			...
+			a 0.5/1(PR): p, q...
+			(inlinks PR: outlinks)
+		2a.ii output: (mixed types)
+			a: foo, PR, #outlinks
+			b: foo, PR, #outlinks
+			(outlinks: inlinks)
+			...
+			a: PR, p, q...
+			(inlinks: PR, outlinks)
+	2b. Reduce:
+		2b.i input: (mixed types)
+			a: foo, PR, #outlinks
+			a: bar, PR, #outlinks
+			(outlinks: inlinks)
+			...
+			a: PR, p, q...
+			(inlinks: PR, outlinks)
+			
+		2b.ii output:
+			a PR: p, q...
+			(inlinks PR(new): outlinks) 
+
+Step 3: Output:
+	3a. Map
+		3a.i input: 
+			key: foo
+			Value: PR, outlinks
+		3a.ii output:
+			key: PR
+			Value: foo
+
+
+PS:
+	1. The PR algorithm converges rapidly for any sized web-graph:
+		322 million links converges in only 52 iterations.
+
