@@ -1,0 +1,23 @@
+WikiSpecies Data:
+	1. Help:Taxonavigation section: https://species.wikimedia.org/wiki/Help:Taxonavigation_section
+		1a. Every name in the taxonavigation should be a link, including the one for the page it's on (this self-link is desirable).
+		1b. format:
+			<page>
+				<title> name </title>
+				...
+				<revision>
+					<comment> '==Taxonavigation== ...' // ignore this line
+
+					<text xml:space="preserve"> ...
+
+					==Taxonavigation== // search key word, sometimes it's "== Taxonavigation =="
+					[[childrenN]] // the most important line ***************
+
+					==Name== // ignore all lines from this line
+					...
+
+					==References== // ignore
+					...
+
+				</revision>
+			</page>

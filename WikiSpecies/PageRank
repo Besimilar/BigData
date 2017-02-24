@@ -34,7 +34,7 @@ Step 2: Iterate (from (inlinks PR: outlinks) to (inlinks PR: outlinks), same fro
 			a: PR, p, q...
 			(inlinks: PR, outlinks)
 			
-		2b.ii output:
+		2b.ii output: ********************* important for iteration
 			a PR: p, q...
 			(inlinks PR(new): outlinks) 
 
@@ -48,7 +48,42 @@ Step 3: Output:
 			Value: foo
 
 
-PS:
+Note:
 	1. The PR algorithm converges rapidly for any sized web-graph:
 		322 million links converges in only 52 iterations.
+
+	2. Sufer Model:
+
+		2a. Damping factor of 85%: 15% likelihood that the surfer jumps to a random page on the whole web: the probability, at any step, that the person will continue following hyperlinks is a damping factor d
+
+		2b. How we browse the Web: by following URLs or by typing at the address bar
+
+	3. PR Formula:
+
+		PR(A) = (1-d)/N + d * Sum(PR(v)/L(v)) --> 
+			i. N for #documents in the collection
+			ii. d for damping factor
+			iii. v for inlinks
+			iv. the sum of all PR is always 1
+			v. PR: reflect the probability that the surfer will land on that page by clicking on a link.
+			vi. (1-d)/N : constant: (1-d) * Sum(PR(v)/N): random from random page
+			vii. in my program: I set (1-d)/N to a constant, and ignore PR(Sink)/N (see below) for all pages ********************* (I don't know whether it's right here, if not, plz let me know: besimilar@gmail.com, ty:)
+
+ 	4. Two type special pages: (It might be more accurate : might not use here) *************
+
+		4a. Sink: if a page has no links to other pages, it becomes a sink and therefore terminates the random surfing process. if the random surfer arrives at a sink page, it picks another URL at random and continues surfing: contributes to other pages:
+
+			d * PR(Sink)/N (not include (1-d)/N to other pages)
+
+			PS: When calculating PageRank, pages with no outbound links are assumed to link out to all other pages in the collection. Their PageRank scores are therefore divided evenly among all other pages. In other words, to be fair with pages that are not sinks, these random transitions are added to all nodes in the Web, with a residual probability usually set to d, estimated from the frequency that an average surfer uses his or her browser's bookmark feature.
+
+		4b. Surface(I name): no links to this page:
+
+			PR(Surface) = (1-d)/N + Sum(PR(Sink)/N) * d
+
+	5. PageRank solves the dominant eigenvector problem by iteratively finding the steady-state discrete flow condition of the network: 
+		5a. inefficient on dense (non-sparse) matrices
+		5b. for dense matrices, MapReduce is the wrong algorithm
+
+
 
