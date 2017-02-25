@@ -21,3 +21,15 @@ WikiSpecies Data:
 
 				</revision>
 			</page>
+
+	2. XmlFormat: see XmlFormat.java, read data between startTag and endTag in XML file: 
+
+		read content between <page> ... </page>
+
+	3. Regular-expression: "(== Taxonavigation ==|==Taxonavigation==)([^=]+)": ******** 
+
+		important: [^=]: not contain "="; not use [^(==)]: it means not containing "(" or "=" or ")"
+
+		3a. http://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html
+		3b. example: http://www.ocpsoft.org/opensource/guide-to-regular-expressions-in-java-part-1/
+		3c. tester: http://www.regexplanet.com/advanced/java/index.html
