@@ -1,0 +1,11 @@
+1. process Chinese Txt: 
+	1a. in word, choose "Wildcards" to replace all "?" to "^& " (a space after &): this step add space among all words: copy this word file back to txt.
+
+	1b. replace all the Chinese punctuation Marks to English Marks.
+
+	1c. remove "\"" marks and some other marks based on your need.
+
+2. Differences between English & Chinese:
+	2a. no space between Chinese word: add space
+	2b. no CapitalLetters in Chinese, for making sentences: only start four words：
+		"你", "我". "他/她" which mean "you", "I", "He/She": set CapitalLetters to these Chinese words.

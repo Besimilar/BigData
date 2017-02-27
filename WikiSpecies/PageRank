@@ -1,4 +1,4 @@
-Step 1: Graph Builder: (pre-process txt)
+Step 1: Graph Builder: (pre-process xml)
 	
 	1a. input: 
 		foo.html: a, b ...
@@ -18,27 +18,42 @@ Step 2: Iterate (from (inlinks PR: outlinks) to (inlinks PR: outlinks), same fro
 			...
 			a 0.5/1(PR): p, q...
 			(inlinks PR: outlinks)
-		2a.ii output: (mixed types)
+		2a.ii output: 
+
+		/* 
 			a: foo, PR, #outlinks
 			b: foo, PR, #outlinks
 			(outlinks: inlinks)
 			...
 			a: PR, p, q...
 			(inlinks: PR, outlinks)
-	2b. Reduce:
-		2b.i input: (mixed types)
-			a: foo, PR, #outlinks
-			a: bar, PR, #outlinks
-			(outlinks: inlinks)
+		*/
+
+			a PR
+			b PR
+			(outlinks PR)
 			...
-			a: PR, p, q...
-			(inlinks: PR, outlinks)
+			a PR: outlinks
+			...
+			(inlinks (1-d)/N: outlinks)
+
+	2b. Reduce:
+		2b.i input:
+			
+			a PR
+			b PR
+			(outlinks PR)
+			...
+			a PR: outlinks
+			...
+			(inlinks (1-d)/N: outlinks)
 			
 		2b.ii output: ********************* important for iteration
 			a PR: p, q...
 			(inlinks PR(new): outlinks) 
 
 Step 3: Output:
+
 	3a. Map
 		3a.i input: 
 			key: foo
@@ -46,6 +61,40 @@ Step 3: Output:
 		3a.ii output:
 			key: PR
 			Value: foo
+
+Step 4: Converge:
+
+	4a. Converge
+		4a.i Map: 
+			input: Iteration output File
+
+			output: 
+				outlinks PR
+				...
+				inlinks (1-d)/N
+				...
+				inlinks "inlinks" (String flag)
+				...
+				inlinks -PR(previous)
+
+		4a.ii Reduce:
+			output:
+				outlinks PR
+				...
+				inlinks deltaPR: "inlinks" 
+				...
+	4b. Sum
+		4b.i Map:
+			input: Converge output File
+
+			output:
+				Converge(it's a Key) deltaPR(1)^2
+				...
+				Converge(key) deltaPR(n)^2
+
+		4b.ii Reduce:
+			output:
+				Converge(Key) SumOf(DeltaPR^2)
 
 
 Note:
