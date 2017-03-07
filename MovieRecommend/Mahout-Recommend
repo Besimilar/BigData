@@ -1,0 +1,11 @@
+Mahout-Recommendation:
+
+1. use mahout-core-0.7-job.jar (with hadoop-0.20.2): if use 2.7.3, get some error, old versions.
+
+2. Command line: 
+
+	$ hadoop jar mahout-core-0.7-job.jar org.apache.mahout.cf.taste.hadoop.item.RecommenderJob -Dmapred.input.dir=<inputFile> -Dmapred.output.dir=<outputLocation> --usersFile <usersFile> --booleanData true --similarityClassname SIMILARITY_COOCCURRENCE
+
+	<input/output/usersFIle>: all in HDFS
+
+	for details arguments, refer to Code/RecommenderJob.java
