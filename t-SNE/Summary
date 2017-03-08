@@ -34,9 +34,29 @@ as well as possible：
 
 Student-t distribution: 
 
-	We are not using a Gaussian kernel, but a Student-t  distribution with one degree of freedom, which is a distribution that's a lot more heavy tilt than the Gaussian distribution.
+	We are not using a Gaussian kernel, but a Student-t  distribution with one degree of freedom, which is a distribution that's a lot more heavy tilt(tailt???) than the Gaussian distribution.
 
-	we try to model the local structure of this data in the map
+	we try to model the local structure of this data in the map: 
+		for dissimilar points, these heavy tailed qij-s basically allow dissimilar points to be modeled too far apart in the map.
+
+
+Gradient interpretation:
+
+	have to look at n squared interactions between points.
+
+	Barnes-Hut approximation: (quadTree)
+		a, b, and c, that are close together, and that exert sort of force on some points, in this case i, that is relatively far away, then these three forces will be pretty much the same: They will be very similar:
+
+			basically take the center of mass of these three points, compute the interaction between the center of mass and the point that we're interested, multiply it by the number of points involved.
+
+
+Multiple maps t-SNE:
+
+ 	1.Construct multiple maps, and give each object a point in each map
+ 	2. Assign an importance weight to each point 
+ 	3. define the similarity between two points under the multiple maps model as a weighted sum over the similarities in the individual maps
+
+
 
 	
 
