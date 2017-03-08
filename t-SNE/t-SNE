@@ -1,0 +1,21 @@
+t-distributed stochastic neighbor embedding: https://www.youtube.com/watch?v=RJVL80Gg3lA
+
+1. Matlab toolbox: https://lvdmaaten.github.io/tsne/: https://lvdmaaten.github.io/drtoolbox/: https://lvdmaaten.github.io/tsne/User_guide.pdf
+
+2. Tutorial: 
+	https://github.com/oreillymedia/t-SNE-tutorial
+	https://github.com/scienceai/tsne-js
+
+3. introduction: nonlinear dimensionality reduction
+
+	a. embedding high-dimensional data into a space of two or three dimensions:
+		it models each high-dimensional object by a two- or three-dimensional point in such a way that similar objects are modeled by nearby points and dissimilar objects are modeled by distant points.
+	b. two main stages:
+		b1. t-SNE constructs a probability distribution over pairs of high-dimensional objects in such a way that similar objects have a high probability of being picked
+		b2. t-SNE defines a similar probability distribution over the points in the low-dimensional map, and it minimizes the Kullback–Leibler divergence between the two distributions with respect to the locations of the points in the map.
+
+	
+	c. preserve small pairwise distance
+
+
+	

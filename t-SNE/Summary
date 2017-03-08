@@ -1,0 +1,43 @@
+pij, which basically measures the similarity between pairs of points ij.
+
+If two points are close together in the original high dimensional space, you're going to have a large value for pij. If two points are dissimilar, are far apart in high dimensional space, you're going to get at pij that is basically infinitesimal.
+
+
+we're not computing joins, joint probabilities over pairs of points. We're actually going to compute
+the conditional distribution, so everything that has changed here is basically the bottom part of the fraction. 
+
+here, where we don't normalize over all pairs of points, but only over pairs of points that involve basically point xi:
+	And the reason we do this is because it allows us to set a different bandwidth, sigma i for each point. And the way we're
+	setting the bandwidth is basically in such a way that the conditional distribution has a fixed perplexity:
+		basically scaling the bandwidth of the Gaussian in such a way that a fixed number of points fall in mode of this Gaussian:
+			different parts of the space may have different densities.
+
+
+
+So we're going to represent each high dimensional object by a point in this low dimensional map.
+
+
+	qij ==  Measure pairwise similarities between low-dimensional map points:
+
+	
+we want is we want these probabilities, qij, to reflect the similarities, pij, which we computed in high dimensional space,
+as well as possible：
+	
+	If the qij-s are physically identical to the pij-s, then apparently the structure of the map is very similar to the structure of the data in the original high dimensional space：
+
+		KullbackLeibler divergence: use this to mesure differences between qij and pij: which is sort of the standard measure of a natural divergence, natural distance measure, between probability distributions:
+
+			in such a way that qij values are similar as possible to the pij values:
+
+			do gradient descent in this KullbackLeibler divergence, which boils down to just moving to points around in such a way that this KullbackLeibler divergence becomes small
+
+
+Student-t distribution: 
+
+	We are not using a Gaussian kernel, but a Student-t  distribution with one degree of freedom, which is a distribution that's a lot more heavy tilt than the Gaussian distribution.
+
+	we try to model the local structure of this data in the map
+
+	
+
+
