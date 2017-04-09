@@ -1,0 +1,72 @@
+SyntaxNet: only CPU support: https://github.com/tensorflow/models/tree/master/syntaxnet#installation
+
+or  use this: no need to configue:
+	http://www.whycouch.com/2016/07/how-to-install-and-use-syntaxnet-and.html
+
+
+Launch a Docker Container:
+
+$ docker run -it -p hostPort:containerPort TensorFlowImage
+
+	Note: 
+	1.  If you'd like to run TensorFlow programs from Jupyter notebook, set both hostPort and containerPort to 8888
+	2.	gcr.io/tensorflow/tensorflow:latest-devel: TensorFlow Binary image plus source code.
+
+restart a Container:
+
+docker start ContainerID/Name
+docker exec -it ContainerName/ID bash
+
+
+My Step:
+
+1. docker run -it gcr.io/tensorflow/tensorflow bash
+
+2. install Bazel: (if use root, ignore sudo)
+	
+$ sudo add-apt-repository ppa:webupd8team/java
+$ sudo apt-get update
+$ sudo apt-get install oracle-java8-installer
+$ echo "deb [arch=amd64] http://storage.googleapis.com/bazel-apt stable jdk1.8" | sudo tee /etc/apt/sources.list.d/bazel.list
+$ curl https://bazel.build/bazel-release.pub.gpg | sudo apt-key add -
+
+$ sudo apt-get update && sudo apt-get install bazel
+$ sudo apt-get upgrade bazel
+
+3. install swig:
+$ apt-get install swig
+
+4. mock:
+$ pip install mock
+
+5. asciitree:
+$ pip install asciitree
+
+6. numpy
+$ pip install numpy
+
+7. pygraphviz:
+$ apt-get install -y graphviz libgraphviz-dev
+$ pip install pygraphviz --install-option="--include-path=/usr/include/graphviz" --install-option="--library-path=/usr/lib/graphviz/"
+
+8. Build SyntaxNet: 
+
+install git: 
+
+$ sudo apt-get install git-all
+
+$ git clone --recursive https://github.com/tensorflow/models.git
+$ cd models/syntaxnet/tensorflow
+$ ./configure
+$ cd ..
+$ bazel test ...
+
+
+
+0. Run:
+
+MODEL_DIRECTORY=~/SyntaxNet/models/syntaxnet/syntaxnet/models/Chinese/
+
+$ cat syntaxnet/models/test2.txt | syntaxnet/models/parsey_universal/parse.sh $MODEL_DIRECTORY > output.conll
+
+

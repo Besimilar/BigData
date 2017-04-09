@@ -1,0 +1,33 @@
+Compile a Java File:
+
+1. mkdir project_classes
+2. javac -classpath xxx.jar -d project_classes xxx.java xxx.java
+3. jar cvf project.jar -C project_classes .
+4. java jar project.jar MainClass args
+
+Fitness Generate:
+1. mkdir Fitness_classes
+2. javac -classpath hadoop-0.20.2-core.jar -d Fitness_classes/ Chromosome.java GAFitnessBuilder.java GAFitnessMapper.java GAFitnessReducer.java
+3. jar cvf GAFitness.jar -C Fitness_classes/ .
+4. ~/hadoop-0.20.2/bin/hadoop jar GAFitness.jar midTerm.HHW.GAFitnessBuilder input output
+
+Chromosome Select:
+1. mkdir Select_classes
+2. javac -classpath hadoop-0.20.2-core.jar -d Select_classes/ Chromosome.java GASelectMapper.java GASelectReducer.java GASelectBuilder.java 
+3. jar cvf GASelect.jar -C Select_classes/ .
+4. ~/hadoop-0.20.2/bin/hadoop jar GASelect.jar midTerm.HHW.GASelectBuilder input output
+
+Reproduce:
+1. mkdir Reproduce_classes
+2. javac -classpath hadoop-0.20.2-core.jar -d Reproduce_classes/ GAReproduceBuilder.java GAReproduceReducer.java GAReproduceMapper.java Chromosome.java 
+3. jar cvf GAReproduce.jar -C Reproduce_classes/ .
+4. ~/hadoop-0.20.2/bin/hadoop jar GAReproduce.jar midTerm.HHW.GAReproduceBuilder input output
+
+Whole MR:
+1. mkdir GALab
+2. javac -classpath hadoop-0.20.2-core.jar -d GALab/ Chromosome.java GAFitnessReducer.java GAFitnessMapper.java GAReproduceMapper.java GAReproduceReducer.java GASelectMapper.java GASelectReducer.java GADriver.java
+3. jar cvf GALab.jar -C GALab/ .
+4. ~/hadoop-0.20.2/bin/hadoop jar GALab.jar midTerm.HHW.GADriver input 24
+
+
+
